@@ -17,7 +17,7 @@ func main() {
 
 	if device_check() != nil {
 		fmt.Println("USBデバッグが有効なデバイスが見つかりません。")
-		fmt.Println("Android端末が正しく接続されているか確認してください")
+		fmt.Println("Android端末が正しく接続されているか確認してください。")
 		os.Exit(1)
 	}
 
@@ -32,7 +32,13 @@ func main() {
 	for _, v := range remove_list {
 		fmt.Println(v)
 	}
-	fmt.Printf("%d個のアプリが削除されます [Y/n]: ", len(remove_list))
+
+	if len(remove_list) == 0 {
+		fmt.Println("キャリアアプリが見つかりませんでした。")
+		os.Exit(0)
+	} else {
+		fmt.Printf("%d個のアプリが削除されます [Y/n]: ", len(remove_list))
+	}
 
 	if input() {
 		for _, v := range remove_list {
